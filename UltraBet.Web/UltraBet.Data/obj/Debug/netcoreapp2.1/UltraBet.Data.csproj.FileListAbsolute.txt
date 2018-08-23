@@ -1,0 +1,6 @@
+C:\My Staff\MyProjects\UltraPlay4\UltraBet.Web\UltraBet.Data\bin\Debug\netcoreapp2.1\UltraBet.Data.deps.json
+C:\My Staff\MyProjects\UltraPlay4\UltraBet.Web\UltraBet.Data\bin\Debug\netcoreapp2.1\UltraBet.Data.dll
+C:\My Staff\MyProjects\UltraPlay4\UltraBet.Web\UltraBet.Data\obj\Debug\netcoreapp2.1\UltraBet.Data.csprojAssemblyReference.cache
+C:\My Staff\MyProjects\UltraPlay4\UltraBet.Web\UltraBet.Data\obj\Debug\netcoreapp2.1\UltraBet.Data.csproj.CoreCompileInputs.cache
+C:\My Staff\MyProjects\UltraPlay4\UltraBet.Web\UltraBet.Data\obj\Debug\netcoreapp2.1\UltraBet.Data.AssemblyInfoInputs.cache
+C:\My Staff\MyProjects\UltraPlay4\UltraBet.Web\UltraBet.Data\obj\Debug\netcoreapp2.1\UltraBet.Data.AssemblyInfo.cs

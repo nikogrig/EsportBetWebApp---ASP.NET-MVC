@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UltraBet.Web", "UltraBet.Web\UltraBet.Web.csproj", "{DCF3AA01-5C15-4FD4-8E5B-15A9F4286D33}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UltraBet.Data", "UltraBet.Data\UltraBet.Data.csproj", "{2FD46F24-05F2-4EC0-993D-1C94F4299B97}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UltraBet.Infrastructure", "UltraBet.Infrastructure\UltraBet.Infrastructure.csproj", "{FF530DAA-F35D-4A0C-855D-D49A17BCB7DC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UltraBet.Common", "UltraBet.Common\UltraBet.Common.csproj", "{CFBAA178-496D-4110-A474-67E32671796B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UltraBet.Services", "UltraBet.Services\UltraBet.Services.csproj", "{CB4F793F-B54F-4605-A2F7-5B9A977EC651}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UltraBet.Constants", "UltraBet.Constants\UltraBet.Constants.csproj", "{FFD9ED1A-BD62-4A22-8458-8340F4687A03}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DCF3AA01-5C15-4FD4-8E5B-15A9F4286D33}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DCF3AA01-5C15-4FD4-8E5B-15A9F4286D33}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DCF3AA01-5C15-4FD4-8E5B-15A9F4286D33}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DCF3AA01-5C15-4FD4-8E5B-15A9F4286D33}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2FD46F24-05F2-4EC0-993D-1C94F4299B97}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2FD46F24-05F2-4EC0-993D-1C94F4299B97}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2FD46F24-05F2-4EC0-993D-1C94F4299B97}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2FD46F24-05F2-4EC0-993D-1C94F4299B97}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FF530DAA-F35D-4A0C-855D-D49A17BCB7DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FF530DAA-F35D-4A0C-855D-D49A17BCB7DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FF530DAA-F35D-4A0C-855D-D49A17BCB7DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FF530DAA-F35D-4A0C-855D-D49A17BCB7DC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CFBAA178-496D-4110-A474-67E32671796B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CFBAA178-496D-4110-A474-67E32671796B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CFBAA178-496D-4110-A474-67E32671796B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CFBAA178-496D-4110-A474-67E32671796B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CB4F793F-B54F-4605-A2F7-5B9A977EC651}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CB4F793F-B54F-4605-A2F7-5B9A977EC651}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CB4F793F-B54F-4605-A2F7-5B9A977EC651}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CB4F793F-B54F-4605-A2F7-5B9A977EC651}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FFD9ED1A-BD62-4A22-8458-8340F4687A03}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FFD9ED1A-BD62-4A22-8458-8340F4687A03}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FFD9ED1A-BD62-4A22-8458-8340F4687A03}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FFD9ED1A-BD62-4A22-8458-8340F4687A03}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {40FBC536-B0D7-419F-A62C-A70FCBFD9E1E}
+	EndGlobalSection
+EndGlobal

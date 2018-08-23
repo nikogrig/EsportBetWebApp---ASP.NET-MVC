@@ -1,0 +1,116 @@
+﻿@*@model HomeViewModel*@
+@*@{
+        ViewData["Title"] = "Home Page";
+    }*@
+
+@*@foreach (var sport in Model.Sports)
+    {
+        <div id="sport">SPORT ID: <b>@sport.Id</b> SPORT NAME: <b>@sport.Name</b> </div>
+        <hr />
+        @foreach (var ev in Model.Events.Where(e => e.SportId == sport.Id))
+        {
+            <div  id="event"><pre>EVENT ID: <b>@ev.Id</b> EVENT GAME: <b>@ev.Game</b> EVENT LEGUE: <b>@ev.Legue</b> EVENT LIVE: <b>@ev.IsLive</b> EVENT CATEGORY: <b>@ev.CategoryId</b> SPORT ID: <b>@ev.SportId</b></pre></div>
+            <hr />
+            @foreach (var match in Model.Matches.Where(m => m.EventId == ev.Id))
+            {
+                <div id="match"><span style="padding-left:4em"> MATCH ID: <b>@match.Id</b> MATCH: <b>@match.TeamA</b> vs. <b>@match.TeamB</b> MATCH START DATE: <b>@match.StartDate</b> MATCH TYPE: <b>@match.MatchType</b> EVENT ID: <b>@match.EventId</b></span></div>
+                <hr />
+                @foreach (var bet in Model.Bets.Where(b => b.MatchId == match.Id))
+                {
+                    <div id="bet"><span style="padding-left:8em">BET ID: <b>@bet.Id</b> BET NAME: <b>@bet.Name</b> BET LIVE: <b>@bet.IsLive</b> MATCH ID: <b>@bet.MatchId</b></span></div>
+                    <hr />
+                    @foreach (var odd in Model.Odds.Where(b => b.BetId == bet.Id))
+                    {
+                        <div id="odd"><span style="padding-left:12em">ODD ID: <b>@odd.Id</b> ODD NAME: <b>@odd.Name</b> ODD VALUE: <b>@odd.Value</b> ODD SPECIAL VALUE: <b>@odd.SpecialBetValue</b> BET ID: <b>@odd.BetId</b></span></div>
+                        <hr />
+                    }
+                }
+            }
+        }
+    }*@
+
+<div id="calldate"></div>
+<div id="messages"></div>
+@section Scripts {
+    <script>
+        var transportType = signalR.TransportType.WebSockets;
+        //can also be ServerSentEvents or LongPolling
+        var logger = new signalR.ConsoleLogger(signalR.LogLevel.Information);
+        var hub = new signalR.HttpConnection(`http://${document.location.host}/notifications`, { transport: transportType, logger: logger });
+        var chatConnection = new signalR.HubConnection(hub, logger);
+
+        chatConnection.onClosed = e => {
+            console.log('connection closed');
+        };
+
+        chatConnection.on('Send', (message) => {
+            var d = new Date();
+            d = new Date(d.getTime());
+            var date_format_str = d.getFullYear().toString() + "-" + ((d.getMonth() + 1).toString().length === 2 ? (d.getMonth() + 1).toString() : "0" + (d.getMonth() + 1).toString()) + "-" + (d.getDate().toString().length === 2 ? d.getDate().toString() : "0" + d.getDate().toString()) + " " + (d.getHours().toString().length === 2 ? d.getHours().toString() : "0" + d.getHours().toString()) + ":" + ((parseInt(d.getMinutes())).toString().length === 2 ? (parseInt(d.getMinutes())).toString() : "0" + (parseInt(d.getMinutes())).toString()) + ':' + ((parseInt(d.getSeconds())).toString().length === 2 ? (parseInt(d.getSeconds())).toString() : "0" + (parseInt(d.getSeconds())).toString() + ':' + ((parseInt(d.getMilliseconds())).toString().length === 2 ? (parseInt(d.getMilliseconds())).toString() : "0" + (parseInt(d.getMilliseconds())).toString()));
+            document.getElementById("calldate").innerHTML = '<div>' + date_format_str + '</div>';
+            document.getElementById('messages').innerHTML = '<div>' + hop(message) + '</div>';
+
+            function hop(message) {
+
+                var jsonMatch = JSON.parse(message);
+                var result = '';
+
+                for (var i in jsonMatch.Events) {
+
+                    result += `<br /><div id="event"><pre>(EVENT) ${jsonMatch.Events[i].Id} Game: <b>${jsonMatch.Events[i].Game}</b> Legue: <b>${jsonMatch.Events[i].Legue}</b> ${jsonMatch.Events[i].IsLive === true ? "Live" : "Record"}</pre></div>`;
+
+                    for (var j in jsonMatch.Matches) {
+
+                        var dateTimeString = jsonMatch.Matches[j].StartDate.split('T');
+                        var time = `${dateTimeString[0]} ${dateTimeString[1]}`;
+
+                        if (jsonMatch.Matches[j].EventId === jsonMatch.Events[i].Id) {
+
+                            result += `<div id="match"><span style="padding-left:4em"><h4>(MATCHES) ${jsonMatch.Matches[j].Id} <b>${jsonMatch.Matches[j].TeamA}</b> vs. <b>${jsonMatch.Matches[j].TeamB}</b> Date: ${time} ${jsonMatch.Matches[j].MatchType === 1 ? "PreMatch" : "Match"} ${jsonMatch.Matches[j].EventId}</h4></span></div>`;
+
+                            for (var z in jsonMatch.Bets) {
+
+                                if (jsonMatch.Bets[z].MatchId === jsonMatch.Matches[j].Id) {
+
+                                    result += `<div id="bet"><span style="padding-left:8em">(BETS) ${jsonMatch.Bets[z].Id} <b>${jsonMatch.Bets[z].Name}</b> ${jsonMatch.Bets[z].IsLive === true ? "Live" : "Record"} ${jsonMatch.Bets[z].MatchId}</span></div>`;
+
+                                    for (var k in jsonMatch.Odds) {
+
+                                        if (jsonMatch.Odds[k].BetId === jsonMatch.Bets[z].Id) {
+
+                                            result += `<div id="odd"><span style="padding-left:12em">(ODDS) ${jsonMatch.Odds[k].Id} <b>${jsonMatch.Odds[k].Name}</b> Value: <b>${jsonMatch.Odds[k].Value}</b> ${jsonMatch.Odds[k].SpecialBetValue === null ? "" : jsonMatch.Odds[k].SpecialBetValue} ${jsonMatch.Odds[k].BetId}</span></div>`;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                return result;
+            }
+        });
+
+        chatConnection.start().catch(err => {
+            console.log('connection error');
+        });
+
+        initialData();
+
+        refreshDataEveryMinutes();
+
+        function refreshDataEveryMinutes() {
+
+            chatConnection.invoke('Send');
+
+            setTimeout(refreshDataEveryMinutes, 60 * 1000);
+        }
+
+        function initialData() {
+
+            chatConnection.invoke('Send');
+
+            return setTimeout(refreshDataEveryMinutes, 1 * 1000);
+        }
+
+    </script>
+}
